@@ -1,0 +1,5 @@
+## [Stock maximum profit](https://coderbyte.com/algorithm/stock-maximum-profit)
+
+You will be given a list of stock prices for a given day and your goal  is to return the maximum profit that could have been made by buying a stock at the given price and then selling the stock later on. For example if the input is: [45, 24, 35, 31, 40, 38, 11] then your program should return 16 because if you bought the stock at \$24 and sold it at $40, a profit of  \$16 was made and this is the largest profit that could be made. If no profit could have been made, return -1.
+
+Será dado uma lista de preços de ações para um determinado dia e sua meta é retornar o maior lucro que poderia ser obtido comprando uma ação por determinado preço e a vendendo mais tarde. Por exemplo se as entradas forem:  [45, 24, 35, 31, 40, 38, 11] então seu programa deve retornar 16 porque se você deve comprar a ação por \$24 e vender por \$40, obtendo um lucro de $16 e este é o maior lucro que poderia ser feito. Se nenhum lucro pode ser feito, retorne -1. 
