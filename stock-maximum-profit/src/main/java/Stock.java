@@ -15,20 +15,17 @@ public class Stock {
 
 		for (int i = 0; i < stockPrices.length - 1; i++) {
 			if (willPriceIncrease(i)) {
-				if (!hasBuyed()) {
+				if (!hasBuyed())
 					buyedBy = buyStock(i);
-				}
 			} else {
-				if (hasBuyed()) {
+				if (hasBuyed())
 					sellStock(i);
-				}
 			}
 		}
 
-		if (hasBuyed()) {
-			int lastIndex = stockPrices.length - 1;
-			sellStock(lastIndex);
-		}
+		if (hasBuyed())
+			sellStock(stockPrices.length - 1);
+
 	}
 
 	private void sellStock(final int i) {

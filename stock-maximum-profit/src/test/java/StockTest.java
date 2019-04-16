@@ -9,7 +9,7 @@ class StockTest {
 	@BeforeEach
 	void init(TestInfo testInfo) {
 		String callingTest = testInfo.getTestMethod().get().getName();
-		System.out.println("Call test: "+callingTest);
+		System.out.println("Call test: " + callingTest);
 	}
 
 	@Test
@@ -47,6 +47,5 @@ class StockTest {
 
 		assertEquals(5, stock.getMaxProffit());
 	}
-
 
 }
