@@ -1,40 +1,59 @@
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Stock {
 
-	private List<Integer> stockPrices = new ArrayList<>();
+	private int[] stockPrices;
 
 	private int maxProffit = 0;
+	private int buyedBy = 0;
 
 	public Stock(int... prices) {
-		Arrays.stream(prices).forEach(price -> stockPrices.add(price));
+		this.stockPrices = prices;
 	}
 
 	public void calculate() {
-		int buyed = 0;
-		for (int i = 0; i < stockPrices.size()-1; i++) {
-			int currentPrice = stockPrices.get(i);
-			int nexPrice = stockPrices.get(i + 1);
-			if (currentPrice < nexPrice) {
-				//Ação irá subir
-				if (buyed == 0) { //se nao comprei ainda devo comprar
-					buyed = currentPrice;
-					print("Comprou por {0} na iteração {1}", currentPrice, i);
+
+		for (int i = 0; i < stockPrices.length - 1; i++) {
+			if (willPriceIncrease(i)) {
+				if (!hasBuyed()) {
+					buyedBy = buyStock(i);
 				}
 			} else {
-				//Ação irá cair ou o preço se manterá
-				if (buyed > 0) { //se ja comprei devo vender para lucrar
-					int proffit = currentPrice - buyed;
-					maxProffit += proffit;
-					buyed = 0;
-					print("Vendi por {0} na iteração {1} e obtive lucro de {3} acumulando lucro de {4}",
-							currentPrice, i, proffit, maxProffit);
+				if (hasBuyed()) {
+					sellStock(i);
 				}
 			}
 		}
+
+		if (hasBuyed()) {
+			int lastIndex = stockPrices.length - 1;
+			sellStock(lastIndex);
+		}
+	}
+
+	private void sellStock(final int i) {
+		int currentPrice = stockPrices[i];
+		int proffit = currentPrice - buyedBy;
+		maxProffit += proffit;
+		buyedBy = 0;
+		print("Vendi por {0} na iteração {1} e obtive lucro de {2} acumulando lucro de {3}",
+				currentPrice, i, proffit, maxProffit);
+	}
+
+	private int buyStock(final int i) {
+		int currentPrice = stockPrices[i];
+		print("Comprou por {0} na iteração {1}", currentPrice, i);
+		return currentPrice;
+	}
+
+	private boolean hasBuyed() {
+		return buyedBy > 0;
+	}
+
+	private boolean willPriceIncrease(int i) {
+		int currentPrice = stockPrices[i];
+		int nexPrice = stockPrices[i + 1];
+		return currentPrice < nexPrice;
 	}
 
 	private void print(final String message, Object... values) {
