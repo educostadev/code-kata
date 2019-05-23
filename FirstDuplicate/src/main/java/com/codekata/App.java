@@ -1,38 +1,18 @@
 package com.codekata;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 public class App {
 
-	int firstDuplicate(int[] a) {
+	int firstDuplicate(int[] array) {
 		Set<Integer> values = new HashSet<>();
-		Map<Integer, Integer> mapDuplicateNumberIndex = new HashMap<>();
-		for (int index = 0; index < a.length; index++) {
-			int value = a[index];
-			if (!mapDuplicateNumberIndex.keySet().contains(value) && values.contains(value)) {
-				mapDuplicateNumberIndex.put(value, index);
-			}
+		for (int value: array) {
+			if (values.contains(value))
+				return value;
+
 			values.add(value);
 		}
-
-		return findValueWithLowerIndex(mapDuplicateNumberIndex);
+		return -1;
 	}
-
-	private int findValueWithLowerIndex(Map<Integer, Integer> mapDuplicateNumberIndex) {
-		int firstDuplicateValue = -1;
-		int firstDuplicateIndex = Integer.MAX_VALUE;
-		for (Map.Entry<Integer, Integer> entry : mapDuplicateNumberIndex.entrySet()) {
-			int value = entry.getKey();
-			int index = entry.getValue();
-			if (index < firstDuplicateIndex) {
-				firstDuplicateValue = value;
-				firstDuplicateIndex = index;
-			}
-		}
-		return firstDuplicateValue;
-	}
-
 }
