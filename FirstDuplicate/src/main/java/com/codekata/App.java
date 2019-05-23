@@ -7,12 +7,12 @@ public class App {
 
 	int firstDuplicate(int[] array) {
 		Set<Integer> values = new HashSet<>();
-		for (int value: array) {
-			if (values.contains(value))
-				return value;
 
-			values.add(value);
+		for (int value : array) {
+			if (!values.add(value))
+				return value;
 		}
+
 		return -1;
 	}
 }
