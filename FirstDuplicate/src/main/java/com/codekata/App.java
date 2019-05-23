@@ -8,28 +8,31 @@ import java.util.Set;
 public class App {
 
 	int firstDuplicate(int[] a) {
-		Set<Integer> numbers = new HashSet<>();
-		Map<Integer, Integer> mapIndex = new HashMap<>();
+		Set<Integer> values = new HashSet<>();
+		Map<Integer, Integer> mapDuplicateNumberIndex = new HashMap<>();
 		for (int index = 0; index < a.length; index++) {
 			int value = a[index];
-			if (numbers.contains(value)) {
-				if (!mapIndex.keySet().contains(value)) {
-					mapIndex.put(value, index);
-				}
+			if (!mapDuplicateNumberIndex.keySet().contains(value) && values.contains(value)) {
+				mapDuplicateNumberIndex.put(value, index);
 			}
-			numbers.add(value);
+			values.add(value);
 		}
-		int firstDuplicate = -1;
+
+		return findValueWithLowerIndex(mapDuplicateNumberIndex);
+	}
+
+	private int findValueWithLowerIndex(Map<Integer, Integer> mapDuplicateNumberIndex) {
+		int firstDuplicateValue = -1;
 		int firstDuplicateIndex = Integer.MAX_VALUE;
-		for (Map.Entry<Integer, Integer> entry : mapIndex.entrySet()) {
-			int key = entry.getKey();
-			int valueIndex = entry.getValue();
-			if (valueIndex < firstDuplicateIndex) {
-				firstDuplicate = key;
-				firstDuplicateIndex = valueIndex;
+		for (Map.Entry<Integer, Integer> entry : mapDuplicateNumberIndex.entrySet()) {
+			int value = entry.getKey();
+			int index = entry.getValue();
+			if (index < firstDuplicateIndex) {
+				firstDuplicateValue = value;
+				firstDuplicateIndex = index;
 			}
 		}
-		return firstDuplicate;
+		return firstDuplicateValue;
 	}
 
 }
