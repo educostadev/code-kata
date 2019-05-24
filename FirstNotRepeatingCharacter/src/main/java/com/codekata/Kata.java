@@ -8,22 +8,18 @@ import java.util.Set;
 public class Kata {
 
 	static char firstNotRepeatingCharacter(String s) {
-
-		Set<Character> letters = new HashSet<>();
+		Set<Character> allLetters = new HashSet<>();
 		List<Character> uniqueLettersOrdered = new ArrayList<>();
-		Set<Character> uniqueLetters = new HashSet<>();
 		for (Character ch : s.toCharArray()) {
-			if (letters.contains(ch)) {
-				if (uniqueLetters.contains(ch)) {
+			if (allLetters.contains(ch)) {
+				if (uniqueLettersOrdered.contains(ch)) {
 					uniqueLettersOrdered.remove(ch);
 				}
 			} else {
-				letters.add(ch);
+				allLetters.add(ch);
 				uniqueLettersOrdered.add(ch);
-				uniqueLetters.add(ch);
 			}
 		}
-
 		return uniqueLettersOrdered.isEmpty() ? '_' : uniqueLettersOrdered.get(0);
 	}
 
