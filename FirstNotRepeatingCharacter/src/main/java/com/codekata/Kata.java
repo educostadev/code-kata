@@ -11,13 +11,10 @@ public class Kata {
 		Set<Character> allLetters = new HashSet<>();
 		List<Character> uniqueLettersOrdered = new ArrayList<>();
 		for (Character ch : s.toCharArray()) {
-			if (allLetters.contains(ch)) {
-				if (uniqueLettersOrdered.contains(ch)) {
-					uniqueLettersOrdered.remove(ch);
-				}
-			} else {
-				allLetters.add(ch);
-				uniqueLettersOrdered.add(ch);
+			if (allLetters.add(ch)){
+				uniqueLettersOrdered.add(ch); //isUnique
+			}else{
+				uniqueLettersOrdered.remove(ch); //isRepeated
 			}
 		}
 		return uniqueLettersOrdered.isEmpty() ? '_' : uniqueLettersOrdered.get(0);
