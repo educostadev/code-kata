@@ -1,5 +1,5 @@
 package com.codekata;
 
-public class App {
+public class Kata {
 
 }
