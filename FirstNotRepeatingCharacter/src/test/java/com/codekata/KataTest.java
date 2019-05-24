@@ -23,6 +23,7 @@ class KataTest {
 				Arguments.of("abcdefghijklmnopqrstuvwxyziflskecznslkjfabe", 'd'),
 				Arguments.of("zzz", '_'),
 				Arguments.of("bcccccccccccccyb", 'y'),
+				Arguments.of("bycccccccccccccb", 'y'),
 				Arguments.of("xdnxxlvupzuwgigeqjggosgljuhliybkjpibyatofcjbfxwtalc", 'd'),
 				Arguments.of("ngrhhqbhnsipkcoqjyviikvxbxyphsnjpdxkhtadltsuxbfbrkof", 'g')
 		);
@@ -35,6 +36,6 @@ class KataTest {
 	}
 
 	private char perform(String s) {
-		return ' ';
+		return Kata.firstNotRepeatingCharacter(s);
 	}
 }
