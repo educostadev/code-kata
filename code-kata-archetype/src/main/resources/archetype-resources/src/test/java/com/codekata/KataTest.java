@@ -16,7 +16,7 @@ class KataTest {
 	private static Stream<Arguments> readInput() {
 		return Stream.of(
 				Arguments.of("abacabad", 'c'),
-				Arguments.of("a", '_'),
+				Arguments.of("a", '_')
 		);
 	}
 
