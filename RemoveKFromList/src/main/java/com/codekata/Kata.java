@@ -4,21 +4,16 @@ public class Kata {
 
 	static ListNode<Integer> removeKFromList(ListNode<Integer> node, int k) {
 
-		ListNode<Integer> newHead = new ListNode<>(null);
-		newHead.next = node;
+		if (node == null)
+			return null;
 
-		ListNode<Integer> previous = newHead;
-		ListNode<Integer> current = node;
-		while (current != null) {
-			if (current.value == k) {
-				previous.next = current.next;
-			} else {
-				previous = current;
-			}
-			current = current.next;
-		}
+		node.next = removeKFromList(node.next, k);
 
-		return newHead.next;
+		if (node.value == k)
+			return node.next;
+
+		return node;
+
 	}
 
 }
