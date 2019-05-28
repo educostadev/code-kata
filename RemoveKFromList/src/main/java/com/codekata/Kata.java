@@ -4,43 +4,34 @@ public class Kata {
 
 	static ListNode<Integer> removeKFromList(ListNode<Integer> node, int k) {
 
-		//Se a entrada for null retornar null
+		node = findFirstNodeNotEqualsTo(k, node);
+		if (node == null)
+			return null;
+
+		ListNode<Integer> firstNode = new ListNode<>(node.value);
+		ListNode<Integer> newNode = firstNode;
+		do {
+			node = node.next;
+			if (node != null && node.value != k) {
+				newNode.next = new ListNode<>(node.value);
+				newNode = newNode.next;
+			}
+		} while (node != null);
+
+		return firstNode;
+	}
+
+	private static ListNode<Integer> findFirstNodeNotEqualsTo(int k, ListNode<Integer> node) {
 		if (node == null) {
 			return null;
 		}
-
-		//Encontrar o primeiro node diferente de K
-		ListNode<Integer> currentNode = node;
-		while (currentNode.next != null && currentNode.value == k) {
-			currentNode = currentNode.next;
+		while (node.next != null && node.value == k) {
+			node = node.next;
 		}
-		if (currentNode.value == k) {
+		if (node.value == k) {
 			return null;
 		}
-
-		//Criar uma nova linkedList
-		ListNode<Integer> newNode = new ListNode<>(currentNode.value);
-		//Guardar a referencia do primeiro Node
-		ListNode<Integer> first = newNode;
-		//Mover para o proximo
-		currentNode = currentNode.next;
-		//Enquando houver proximo Node
-		while (currentNode.next != null) {
-			//Caso o valor seja != k entao fazer a ligacao com o proximo
-			if (currentNode.value != k) {
-				newNode.next = new ListNode<>(currentNode.value);
-				//mover o novo node para o proximo que foi criado
-				newNode = newNode.next;
-			}
-			//Mover havaliacao para o proximo
-			currentNode = currentNode.next;
-		}
-		//Ultimo node nao foi havalidao
-		if (currentNode.value != k){
-			newNode.next = new ListNode<>(currentNode.value);
-		}
-
-		return first;
+		return node;
 	}
 
 }
