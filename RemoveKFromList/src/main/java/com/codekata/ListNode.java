@@ -25,8 +25,7 @@ public class ListNode<T> {
 		}
 		values.add(node.value);
 
-		int[] array = values.stream().mapToInt(i -> i).toArray();
-		return array;
+		return values.stream().mapToInt(i -> i).toArray();
 	}
 
 	static ListNode<Integer> toNode(int[] array) {
