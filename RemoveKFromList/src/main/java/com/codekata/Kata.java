@@ -4,34 +4,21 @@ public class Kata {
 
 	static ListNode<Integer> removeKFromList(ListNode<Integer> node, int k) {
 
-		node = findFirstNodeNotEqualsTo(k, node);
-		if (node == null)
-			return null;
+		ListNode<Integer> newHead = new ListNode<>(null);
+		newHead.next = node;
 
-		ListNode<Integer> firstNode = new ListNode<>(node.value);
-		ListNode<Integer> newNode = firstNode;
-		do {
-			node = node.next;
-			if (node != null && node.value != k) {
-				newNode.next = new ListNode<>(node.value);
-				newNode = newNode.next;
+		ListNode<Integer> previous = newHead;
+		ListNode<Integer> current = node;
+		while (current != null) {
+			if (current.value == k) {
+				previous.next = current.next;
+			} else {
+				previous = current;
 			}
-		} while (node != null);
+			current = current.next;
+		}
 
-		return firstNode;
-	}
-
-	private static ListNode<Integer> findFirstNodeNotEqualsTo(int k, ListNode<Integer> node) {
-		if (node == null) {
-			return null;
-		}
-		while (node.next != null && node.value == k) {
-			node = node.next;
-		}
-		if (node.value == k) {
-			return null;
-		}
-		return node;
+		return newHead.next;
 	}
 
 }
