@@ -13,6 +13,9 @@ import org.junit.jupiter.params.provider.MethodSource;
  */
 class KataTest {
 
+	/**
+	 * @return Return a Stream of Agrument to be tested. Arguments.of(<INPUT>,<EXPECTED>)
+	 */
 	private static Stream<Arguments> readInput() {
 		return Stream.of(
 				Arguments.of("abacabad", 'c'),
@@ -20,6 +23,11 @@ class KataTest {
 		);
 	}
 
+	/**
+	 * Adjust the method signature type according to the INPUT and EXPECTED result.
+	 * @param input - The input that should be tested.
+	 * @param expected - The expected result.
+	 */
 	@ParameterizedTest
 	@MethodSource("readInput")
 	void myTest(String input, char expected) {
@@ -27,6 +35,6 @@ class KataTest {
 	}
 
 	private char perform(String s) {
-		return ' ';
+		return Kata.perform(s);
 	}
 }
