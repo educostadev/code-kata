@@ -11,30 +11,34 @@ import org.junit.jupiter.params.provider.MethodSource;
 /**
  * https://www.baeldung.com/parameterized-tests-junit-5
  */
-class KataTest {
+class SolutionTest {
 
 	/**
 	 * @return Return a Stream of Agrument to be tested. Arguments.of(<INPUT>,<EXPECTED>)
 	 */
 	private static Stream<Arguments> readInput() {
 		return Stream.of(
-				Arguments.of("abacabad", 'c'),
-				Arguments.of("a", '_')
+				Arguments.of(9, 2), //1001
+				Arguments.of(529, 4), // 1000010001
+				Arguments.of(20, 1), //10100
+				Arguments.of(15, 0), //1111
+				Arguments.of(32, 0)//100000
 		);
 	}
 
 	/**
 	 * Adjust the method signature type according to the INPUT and EXPECTED result.
-	 * @param input - The input that should be tested.
+	 *
+	 * @param input    - The input that should be tested.
 	 * @param expected - The expected result.
 	 */
 	@ParameterizedTest
 	@MethodSource("readInput")
-	void myTest(String input, char expected) {
+	void myTest(int input, int expected) {
 		assertEquals(expected, perform(input));
 	}
 
-	private char perform(String s) {
-		return Kata.perform(s);
+	private int perform(int N) {
+		return Solution.solution(N);
 	}
 }
