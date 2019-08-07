@@ -18,14 +18,16 @@ class KataTest {
 	 */
 	private static Stream<Arguments> readInput() {
 		return Stream.of(
-				Arguments.of(new Integer[]{1,2,3,4,5,6,7,8,9}, 5, 4),
-				Arguments.of(new Integer[]{1,2,3,4,5,6,7,8,9}, 10, -1)
+				Arguments.of(new Integer[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, 5, 4),
+				Arguments.of(new Integer[] { 1, 2, 3 }, 10, -1),
+				Arguments.of(new Integer[] { 1, 2, 3 }, 0, -1)
 		);
 	}
 
 	/**
 	 * Adjust the method signature type according to the INPUT and EXPECTED result.
-	 * @param input - The input that should be tested.
+	 *
+	 * @param input    - The input that should be tested.
 	 * @param expected - The expected result.
 	 */
 	@ParameterizedTest
@@ -35,6 +37,6 @@ class KataTest {
 	}
 
 	private int perform(Integer[] input, int find) {
-		return Kata.perform(input,find);
+		return Kata.perform(input, find);
 	}
 }
