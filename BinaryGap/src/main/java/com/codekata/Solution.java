@@ -2,20 +2,23 @@ package com.codekata;
 
 class Solution {
 
+	/*
+		Problem: Binary Gap - A sequence of 0 surronded by 1
+		Input: A positive integer
+		Output: The lenght of the longest binary gap. 0 if the binary does not contain.
+
+		Given a number
+		Convert the number to binary
+		Find the first index for 1
+		Initialize current gap value with 0
+		While there is a next index for 1 after the first index
+		 Get the next index for 1 after the first index
+		 Calculate the gap between the first index and the next index
+		 If the gap found is higher than current gap then current gap receives gap found
+		 first index receives next index
+		Return current gap
+	 */
 	static int solution(int N) {
-		//Binary gap: A sequence of 0 surronded by 1
-		//INPUT: A positive integer
-		//OUTPUT: The length of the longest binary gap. Zero if N does not contain
-
-		//Get the first index for 1
-		//initialize gap with 0
-		//While has a nextIndex for 1 after index
-		//get the nextIndex for 1 after index
-		//calculate the gap between nextIndex and index
-		//if currentGap is greader than gap so gap is equal to current gap
-		//index not is equal to next index
-		//return gap
-
 		String binary = Integer.toBinaryString(N);
 		int gap = 0;
 		int index = binary.indexOf('1');
