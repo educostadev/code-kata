@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 /**
  * https://www.baeldung.com/parameterized-tests-junit-5
  */
-class KataTest {
+class AlgorithmTest {
 
 	/**
 	 * @return Return a Stream of Agrument to be tested. Arguments.of(<INPUT>,<EXPECTED>)
@@ -32,11 +32,15 @@ class KataTest {
 	 */
 	@ParameterizedTest
 	@MethodSource("readInput")
-	void myTest(Integer[] input, int find, int expected) {
-		assertEquals(expected, perform(input, find));
+	void nonRecursiveAlgorithm(Integer[] input, int find, int expected) {
+		assertEquals(expected, Algorithm.search_non_recursive(input, find));
 	}
 
-	private int perform(Integer[] input, int find) {
-		return Kata.perform(input, find);
+
+	@ParameterizedTest
+	@MethodSource("readInput")
+	void recursiveAlgorithm(Integer[] input, int find, int expected) {
+		assertEquals(expected, Algorithm.search_recursive(input, find));
 	}
+
 }
