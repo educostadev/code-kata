@@ -18,7 +18,7 @@ class KataTest {
 	 */
 	private static Stream<Arguments> readInput() {
 		return Stream.of(
-				Arguments.of("ABC", "ABC ACB BAC BCA CBA CAB")
+				Arguments.of("ABC", "ABC ACB BAC BCA CAB CBA")
 		);
 	}
 
