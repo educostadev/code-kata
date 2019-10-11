@@ -1,30 +1,119 @@
 import java.util.*;
 
-import javafx.scene.Node;
-
 import static java.lang.System.out;
+import static java.lang.System.err;
 import java.lang.*;
 
 public class SinglyLinkedListImplementation {
 
     public static void main(String args[]) {
-        Node head = new Node(0);
-        out.println(head);
-        for (int i = 1; i <= 5; i++) {
-            head.appendToTail(i);
-            out.println(head);
+        SinglyLinkedList lkList = new SinglyLinkedList();
+        assertEquals("empty", lkList.toString());
+       
+        lkList = new SinglyLinkedList();
+        lkList.addFirst(1);
+        assertEquals("1->null", lkList.toString());
+    
+        lkList.addFirst(0);
+        assertEquals("0->1->null", lkList.toString());
+
+        lkList = new SinglyLinkedList();
+        lkList.addLast(1);
+        assertEquals("1->null", lkList.toString());
+
+        lkList.addLast(2);
+        assertEquals("1->2->null", lkList.toString());
+
+        lkList = new SinglyLinkedList();
+        lkList.addLast(0).addLast(1).addLast(3);
+        lkList.add(2, 2);
+        assertEquals("0->1->2->3->null", lkList.toString());
+        
+        lkList = new SinglyLinkedList();
+        lkList.addLast(0).addLast(1).addLast(2).addLast(3);
+        lkList.removeFirst();
+        assertEquals("1->2->3->null", lkList.toString());
+    
+        lkList = new SinglyLinkedList();
+        lkList.addLast(0);
+        lkList.removeFirst();
+        assertEquals("empty", lkList.toString());
+    }
+
+    static class SinglyLinkedList{
+        Node head;
+        Node tail;
+
+        //removeFirst
+        //removeLast
+        //remove(inde index)
+
+        void removeFirst() {
+            Node first = head;
+            head = first.next;
+            first.next = null;
+            if (first.next == null)
+                tail = null;
         }
 
-        head = deleteNode(head, 0);
-        out.println(head);
-        head = deleteNode(head, 3);
-        out.println(head);
-        head = deleteNode(head, 5);
-        out.println(head);
+        SinglyLinkedList add(int data, int position) {
+            if (position == 0) {
+                return this.addFirst(data);
+            }
+            int count = 0;
+            Node node = head;
+            while (count < position - 1) {
+                node = node.next;
+                count++;
+            }
+
+            Node newNode = new Node(data);
+            Node temp = node.next;
+            node.next = newNode;
+            newNode.next = temp; 
+
+            return this;
+        }
+
+        SinglyLinkedList addLast(int data) {
+            if (head == null) {
+                initialize(data);
+            } else {
+                Node newNode = new Node(data);
+                tail.next = newNode;
+                tail = newNode;
+            }
+            return this;
+        }
+
+        SinglyLinkedList addFirst(int data) {
+            if (head == null)
+                initialize(data);
+            else {
+                Node newNode = new Node(data);
+                newNode.next = head;
+                head = newNode;
+            }
+            return this;
+        }
+
+        void initialize(int data) {
+            Node node = new Node(data);
+            head = node;
+            tail = node;
+        }
+
+        public String toString() {
+            if (head == null && tail == null)
+                return "empty";
+                
+            return head.toString();
+        }
+
     }
 
     // Delete a note and return a new Head
-    static Node deleteNode(Node head, int data) {
+    static Node deleteNodeWithData(Node head, int data) {
         if (head.data == data) {
             Node n = head.next;
             head.next = null;
@@ -70,5 +159,13 @@ public class SinglyLinkedListImplementation {
             str.append("null");
             return str.toString();
         }
+    }
+
+    static void assertEquals(String expected, String value) {
+        String msg = "Expected[" + expected + "] was [" + value + "]";
+        if (!expected.equals(value))
+            throw new RuntimeException("Fail " + msg);
+            
+        out.println("OK! " + msg);
     }
 }

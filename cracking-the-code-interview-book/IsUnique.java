@@ -3,38 +3,42 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /*
-1.1
-Is Unique:  Implement an algorithm to determine if a string has all unique characters. What if you
-cannot use additional data structures?
+1.1 - From book Cracking code Interview
+Is Unique:  
+Implement an algorithm to determine if a string has all unique characters. 
+What if you cannot use additional data structures?
 Hints: #44,  #7 7  7,  #732
 */
 public class IsUnique {
 
-    IsUnique() {
-    }
 
-    public static void main(String[] args) {
-        IsUnique algorithm = new IsUnique();
+    //Book Solution
+    //Time Complexibility: O(n)
+    //Assumption: The input string is a sequence os ASCII characteres. 
+    //Description: Create a boolean array of length 128 wich is on position for each ASCII charactere 
+    //For each charactere check is the value is true in the char position and return that the sequence
+    //is not unique, othersie add true in the position.
+    //
+    //The max unique character lenght is 128 so return false if the sequence is higher
+    //Create a boolean exists array of 128 position
+    //For each charactere in the sequence
+    //|Check if the exists array at position of charactere is true then return the sequence is not unique
+    //|othersise add true on exists array at charactere positon
+    //Return true  
+    boolean isUniqueBookSolution(String sequence) {
 
-        assertTrue(algorithm.isUniqueWithDataStructure("abc"));
-        assertFalse(algorithm.isUniqueWithDataStructure("abca"));
-        assertTrue(algorithm.isUniqueWithoutUseDataStructure("abc"));
-        assertFalse(algorithm.isUniqueWithoutUseDataStructure("abca"));
-        assertTrue(algorithm.isUniqueBookSolution("abc"));
-        assertFalse(algorithm.isUniqueBookSolution("abca"));
-        assertTrue(algorithm.isUnique_SoluctionWithHashSetOptimized("abc"));
-        assertFalse(algorithm.isUnique_SoluctionWithHashSetOptimized("abca"));
-        System.out.println("Success");
-    }
+        if (sequence.length() > 128)
+            return false;
 
-    static void assertFalse(boolean result) {
-        if (result != false)
-            throw new RuntimeException("Expected False");
-    }
+        boolean exists[] = new boolean[128];
+        for (char charactere : sequence.toCharArray()) {
+            if (exists[charactere] == true) {
+                return false;
+            }
+            exists[charactere] = true;
+        }
+        return true;
 
-    static void assertTrue(boolean result) {
-        if (!result)
-            throw new RuntimeException("Expected True");
     }
 
     boolean isUniqueWithDataStructure(String sequence) {
@@ -82,29 +86,29 @@ public class IsUnique {
         return true;
     }
 
-    boolean isUniqueBookSolution(String sequence) {
-        // Assumptions: The sequence is ASCII characters. 128 character with pontuation
-        // Return false if que sequence lenght is > 128 wich is the max unique
-        // characters
-        // Create a boolean array of the max character size to represent the character
-        // exists
-        // for each character
-        // Get the the value from the boolean array at character index
-        // If the value is true then the ch is repeted and return false otherswise add
-        // true on the position
-        // Return false at the end for no repetition
 
-        if (sequence.length() > 128)
-            return false;
 
-        boolean charExists[] = new boolean[128];
-        for (char ch : sequence.toCharArray()) {
-            if (charExists[ch] == true) {
-                return false;
-            }
-            charExists[ch] = true;
-        }
-        return true;
+    public static void main(String[] args) {
+        IsUnique algorithm = new IsUnique();
 
+        assertTrue(algorithm.isUniqueWithDataStructure("abc"));
+        assertFalse(algorithm.isUniqueWithDataStructure("abca"));
+        assertTrue(algorithm.isUniqueWithoutUseDataStructure("abc"));
+        assertFalse(algorithm.isUniqueWithoutUseDataStructure("abca"));
+        assertTrue(algorithm.isUniqueBookSolution("abc"));
+        assertFalse(algorithm.isUniqueBookSolution("abca"));
+        assertTrue(algorithm.isUnique_SoluctionWithHashSetOptimized("abc"));
+        assertFalse(algorithm.isUnique_SoluctionWithHashSetOptimized("abca"));
+        System.out.println("Success");
+    }
+
+    static void assertFalse(boolean result) {
+        if (result != false)
+            throw new RuntimeException("Expected False");
+    }
+
+    static void assertTrue(boolean result) {
+        if (!result)
+            throw new RuntimeException("Expected True");
     }
 }

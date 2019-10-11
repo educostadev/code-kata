@@ -71,15 +71,21 @@ public class PairSum {
         return false;
     }
 
-    // Initilize lowerIndex with 0
-    // Initilize higherIndex with input.lenght-1
-    // While lowerIndex != higherIndex
-    // |Initilize sum = input[lowerNumber] + input[HigherNumber]
-    // |If sum is sumExpected return true
-    // |elseIf sum is higher than sumExpected higerIndex--
-    // |elseIf sum is lower than sumExpected lowerIndex++
-    // Return false
+    // Good Solution
     // Time complexibility: O(n)
+    // Input array should be sorted
+    // Description: Create a lower and higher index abd compare if the sum of the pair is equal
+    // the sum you are looking for. When the sum is lower increase the lowerIndex and when the sum 
+    // is higher decrease the higher index. Move both index until they meet each other. 
+    //
+    // Initilize a lowerIndex with 0
+    // Initilize a higherIndex with input.lenght-1
+    // Move both index While lowerIndex != higherIndex
+    // |Calculate sum = input[lowerNumber] + input[HigherNumber]
+    // |Check If sum == sumExpected then return true
+    // |else check If sum > sumExpected then higerIndex--
+    // |else check if sum < sumExpected lowerIndex++
+    // Return false
     static boolean hasPairUsingThePairSolutionUsingSortedArray(int[] input, int sumExpected) {
         int lowerIndex = 0;
         int higherIndex = input.length - 1;
@@ -95,13 +101,18 @@ public class PairSum {
         return false;
     }
 
-    // Initializer a Set buffer
-    // For reach number
-    // |Initilize numberToFind = sumExpected-number
-    // |if buffer.contains(numberToFind) return true
-    // |Otherwise add number on buffer
-    // Return false
+    // Best Solution
     // Time Complexibility: O(n)
+    // Input array can be unordered 
+    // Description: Crate a buffer to hold the numbers already visited and 
+    // for each interation check if the complement necessary is in the buffer.
+    //
+    // Initialize a Set buffer
+    // For each number in the input
+    // |Calculate the complement = sumExpected-number
+    // |Check if buffer.contains(complement) then return true
+    // |else buffer.add(number)
+    // Return false
     static boolean hasPairUsingBufferSolution(int[] input, int sumExpected) {
         Set<Integer> buffer = new HashSet<>();
         for (Integer number : input) {
