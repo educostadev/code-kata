@@ -3,7 +3,7 @@ import java.lang.*;
 import static java.lang.System.out;
 
 /**
- * Write a SortedMerge() function that takes two lists, each of which is sorted
+ * Write a SortedMerge() function that takes two linked lists, each of which is sorted
  * in increasing order, and merges the two together into one list which is in
  * increasing order. SortedMerge() should return the new list. The new list
  * should be made by splicing together the nodes of the first two lists.
@@ -26,24 +26,15 @@ public class LinkedListMergeSorted {
         addToTail(headB, 20);
         out.println("headB: " + toString(headB));
 
-        Node sortedHead = sort(headA, headB);
+        Node sortedHead = merge(headA, headB);
         assertEquals("2->3->5->10->15->20->null", toString(sortedHead));
 
     }
 
-    static Node sort(Node headA, Node headB) {
+    static Node merge(Node headA, Node headB) {
         Node dummy = new Node(-1);
         Node tail = dummy;
-        while (true) {
-
-            if (headA == null) {
-                tail.next = headB;
-                break;
-            } else if (headB == null) {
-                tail.next = headA;
-                break;
-            }
-
+        while (headA !=null && headB != null) {
             if (headA.data <= headB.data) {
                 tail.next = headA;
                 tail = headA;
@@ -53,6 +44,12 @@ public class LinkedListMergeSorted {
                 tail = headB;
                 headB = headB.next;
             }
+        }
+
+        if (headA == null) {
+            tail.next = headB;
+        } else if (headB == null) {
+            tail.next = headA;
         }
 
         return dummy.next;

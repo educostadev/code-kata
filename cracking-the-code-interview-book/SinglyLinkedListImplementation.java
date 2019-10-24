@@ -4,6 +4,7 @@ import static java.lang.System.out;
 import static java.lang.System.err;
 import java.lang.*;
 
+//Implemeting a Singly Linked List
 public class SinglyLinkedListImplementation {
 
     public static void main(String args[]) {
