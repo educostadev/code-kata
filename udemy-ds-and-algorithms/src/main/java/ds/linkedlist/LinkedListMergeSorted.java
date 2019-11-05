@@ -1,3 +1,5 @@
+package ds.linkedlist;
+
 import java.util.*;
 import java.lang.*;
 import static java.lang.System.out;

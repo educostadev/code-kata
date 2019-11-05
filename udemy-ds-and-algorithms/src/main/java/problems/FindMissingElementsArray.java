@@ -1,3 +1,5 @@
+package problems;
+
 import java.lang.*;
 import java.util.*;
 import static java.lang.System.out;
