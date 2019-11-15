@@ -1,11 +1,9 @@
-package ds.tree;
+package ds.tree.util;
 
 import java.util.*;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.lang.*;
 
-class PrintTree {
+public class PrintTree {
 
     /**
      * Print a tree

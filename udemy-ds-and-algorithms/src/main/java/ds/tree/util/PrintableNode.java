@@ -1,4 +1,4 @@
-package ds.tree;
+package ds.tree.util;
 
 /** Node that can be printed */
 public interface PrintableNode {
