@@ -1,3 +1,7 @@
+# High Five
+
+- https://leetcode.com/problems/high-five/
+
 Given a list of the scores of different students, `items`, where `items[i] = [IDi, scorei]` represents one score from a student with `IDi`, calculate each student's **top five average**.
 
 Return *the answer as an array of pairs* `result`*, where* `result[j] = [IDj, topFiveAveragej]` *represents the student with* `IDj` *and their **top five average**. Sort* `result` *by* `IDj` *in **increasing order**.*

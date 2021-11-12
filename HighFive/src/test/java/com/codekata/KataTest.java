@@ -34,11 +34,15 @@ class KataTest {
    */
   @ParameterizedTest
   @MethodSource("readInput")
-  void myTest(int[][] input, int[][] expected) {
-    Assertions.assertArrayEquals(expected, perform(input));
+  void testSortingApproach(int[][] input, int[][] expected) {
+    Assertions.assertArrayEquals(expected, Kata.sortingApproach(input));
   }
 
-  private int[][] perform(int[][] s) {
-    return Kata.sortingApproach(s);
+  @ParameterizedTest
+  @MethodSource("readInput")
+  void testMaxHeapApproach(int[][] input, int[][] expected) {
+    Assertions.assertArrayEquals(expected, Kata.maxHeapApproach(input));
   }
+
+
 }
