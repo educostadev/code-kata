@@ -1,3 +1,9 @@
+# gitpod.io files
+.settings
+.project
+.gitpod.yml
+.classpath
+
 # Compiled class file
 *.class
 
