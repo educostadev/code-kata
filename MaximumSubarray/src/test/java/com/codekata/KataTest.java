@@ -18,8 +18,9 @@ class KataTest {
 	 */
 	private static Stream<Arguments> readInput() {
 		return Stream.of(
-				Arguments.of("abacabad", 'c'),
-				Arguments.of("a", '_')
+				Arguments.of(new int[]{-2,1,-3,4,-1,2,1,-5,4}, 6),
+				Arguments.of(new int[]{1}, 1),
+				Arguments.of(new int[]{5,4,-1,7,8}, 23)
 		);
 	}
 
@@ -30,11 +31,11 @@ class KataTest {
 	 */
 	@ParameterizedTest
 	@MethodSource("readInput")
-	void myTest(String input, char expected) {
+	void myTest(int[] input, int expected) {
 		assertEquals(expected, perform(input));
 	}
 
-	private char perform(String s) {
-		return Kata.perform(s);
+	private int perform(int[] s) {
+		return Kata.bruteForceApproach(s);
 	}
 }
