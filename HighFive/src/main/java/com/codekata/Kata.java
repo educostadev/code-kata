@@ -1,17 +1,14 @@
 package com.codekata;
 
-import static com.codekata.PrintUtil.printHorizontal;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.TreeMap;
 
-public class Kata {
+public class Kata implements Solution {
 
   /*
   //[a] Sort the items by ID increasing and Score decreasing.
@@ -40,7 +37,7 @@ public class Kata {
       }
       //[c] Create a result [id, average] and store it into a list.
       int id = items[n][0];
-      int result[] = new int[]{id, sum / 5};
+      int[] result = new int[] {id, sum / 5};
       resultList.add(result);
       //[d] Jump to the next ID
       while (n < l && id == items[n][0]) {
@@ -82,12 +79,21 @@ public class Kata {
       }
       //[d] Create a result [id, average] and store it into a list.
       int average = sum / 5;
-      int[] result = new int[]{id, average};
+      int[] result = new int[] {id, average};
       resultList.add(result);
     }
     //[e] Convert the list of arrays into an multi-dimensional array and return
     return resultList.toArray(new int[resultList.size()][]);
   }
 
+
+  @Override
+  public int[][] solve(int[][] input) {
+    int[][] result = maxHeapApproach(input);
+    //int[][] result = sortingApproach(input);
+    this.printHorizontal(result);
+    return result;
+
+  }
 
 }

@@ -1,9 +1,7 @@
 package com.codekata;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.util.stream.Stream;
-
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -13,28 +11,27 @@ import org.junit.jupiter.params.provider.MethodSource;
  */
 class KataTest {
 
-	/**
-	 * @return Return a Stream of Agrument to be tested. Arguments.of(<INPUT>,<EXPECTED>)
-	 */
-	private static Stream<Arguments> readInput() {
-		return Stream.of(
-				Arguments.of("abacabad", 'c'),
-				Arguments.of("a", '_')
-		);
-	}
+  /**
+   * @return Return a Stream of Argument to be tested. Arguments.of(<INPUT>,<EXPECTED>)
+   */
+  private static Stream<Arguments> readInput() {
+    return Stream.of(
+        Arguments.of("abacabad", 'c'),
+        Arguments.of("a", 'c')
+    );
+  }
 
-	/**
-	 * Adjust the method signature type according to the INPUT and EXPECTED result.
-	 * @param input - The input that should be tested.
-	 * @param expected - The expected result.
-	 */
-	@ParameterizedTest
-	@MethodSource("readInput")
-	void myTest(String input, char expected) {
-		assertEquals(expected, perform(input));
-	}
+  /**
+   * Adjust the method signature type according to the INPUT and EXPECTED result.
+   *
+   * @param input    - The input that should be tested.
+   * @param expected - The expected result.
+   */
+  @ParameterizedTest
+  @MethodSource("readInput")
+  void solveTheProblem(String input, char expected) {
+    ISolution ISolution = new Kata();
+    Assertions.assertEquals(expected, ISolution.solve(input));
+  }
 
-	private char perform(String s) {
-		return Kata.perform(s);
-	}
 }

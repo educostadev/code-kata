@@ -1,9 +1,6 @@
 package com.codekata;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.util.stream.Stream;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -20,8 +17,8 @@ class KataTest {
   private static Stream<Arguments> readInput() {
     return Stream.of(
         Arguments.of(
-            new int[][]{{1, 91}, {1, 92}, {2, 93}, {2, 97}, {1, 60}, {2, 77}, {1, 65}, {1, 87}, {1, 100}, {2, 100}, {2, 76}},
-            new int[][]{{1, 87}, {2, 88}}
+            new int[][] {{1, 91}, {1, 92}, {2, 93}, {2, 97}, {1, 60}, {2, 77}, {1, 65}, {1, 87}, {1, 100}, {2, 100}, {2, 76}},
+            new int[][] {{1, 87}, {2, 88}}
         )
     );
   }
@@ -35,13 +32,8 @@ class KataTest {
   @ParameterizedTest
   @MethodSource("readInput")
   void testSortingApproach(int[][] input, int[][] expected) {
-    Assertions.assertArrayEquals(expected, Kata.sortingApproach(input));
-  }
-
-  @ParameterizedTest
-  @MethodSource("readInput")
-  void testMaxHeapApproach(int[][] input, int[][] expected) {
-    Assertions.assertArrayEquals(expected, Kata.maxHeapApproach(input));
+    Solution solution = new Kata();
+    Assertions.assertArrayEquals(expected, solution.solve(input));
   }
 
 

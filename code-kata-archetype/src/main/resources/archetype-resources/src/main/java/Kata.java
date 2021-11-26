@@ -1,8 +1,9 @@
 package com.codekata;
 
-public class Kata {
+public class Kata implements ISolution {
 
-	public static char perform(String input){
-		return ' ';
-	}
+  @Override
+  public char solve(String input) {
+    return 'c';
+  }
 }
