@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 /**
  * https://www.baeldung.com/parameterized-tests-junit-5
  */
-class KataTest {
+abstract class KataTest {
 
   /**
    * @return Return a Stream of Agrument to be tested. Arguments.of(<INPUT>,<EXPECTED>)
@@ -32,9 +32,11 @@ class KataTest {
   @ParameterizedTest
   @MethodSource("readInput")
   void testSortingApproach(int[][] input, int[][] expected) {
-    Solution solution = new Kata();
+    Solution solution = createSolution();
     Assertions.assertArrayEquals(expected, solution.solve(input));
   }
+
+  abstract Solution createSolution();
 
 
 }
