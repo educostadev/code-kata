@@ -3,7 +3,7 @@ package com.codekata;
 
 import java.util.Arrays;
 
-public interface ISolution {
+public interface Solution {
 
   /**
    * Change the type of the input and output according to the expected type of the problem being solved.

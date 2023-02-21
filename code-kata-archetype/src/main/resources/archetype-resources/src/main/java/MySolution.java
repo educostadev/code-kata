@@ -1,6 +1,6 @@
 package com.codekata;
 
-public class Kata implements ISolution {
+public class MySolution implements Solution {
 
   @Override
   public char solve(String input) {

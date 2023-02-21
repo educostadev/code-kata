@@ -16,8 +16,9 @@ abstract class KataTest {
    */
   private static Stream<Arguments> readInput() {
     return Stream.of(
-        Arguments.of("abacabad", 'c'),
-        Arguments.of("a", 'c')
+            Arguments.of(new int[]{-2,1,-3,4,-1,2,1,-5,4}, 6),
+            Arguments.of(new int[]{1}, 1),
+            Arguments.of(new int[]{5,4,-1,7,8}, 23)
     );
   }
 
@@ -29,7 +30,7 @@ abstract class KataTest {
    */
   @ParameterizedTest
   @MethodSource("readInput")
-  void solveTheProblem(String input, char expected) {
+  void solveTheProblem(int[] input, int expected) {
     Solution solution = createSolution();
     Assertions.assertEquals(expected, solution.solve(input));
   }
