@@ -1,6 +1,9 @@
 package com.codekata;
 
 
+import com.codekata.util.Node;
+import com.codekata.util.PrintTree;
+
 import java.util.Arrays;
 
 public interface Solution {
@@ -11,7 +14,7 @@ public interface Solution {
    * @param input - The input for the problem.
    * @return output - The result for the problem solved.
    */
-  int solve(Integer[] input);
+  int solve(Node<Integer> root);
 
   /**
    * Utility method for print array vertically.
@@ -32,4 +35,11 @@ public interface Solution {
     System.out.println(Arrays.deepToString(items));
   }
 
+  default void printNodeVertical(Node<?> root){
+    PrintTree.vertical(root);
+  }
+
+  default void printNodeHorizontal(Node<?> root){
+    PrintTree.horizontal(root);
+  }
 }
