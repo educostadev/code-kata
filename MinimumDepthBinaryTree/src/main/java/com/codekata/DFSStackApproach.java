@@ -5,9 +5,10 @@ import com.codekata.util.Pair;
 
 import java.util.Stack;
 
-public class StackApproach implements Solution {
+public class DFSStackApproach implements Solution {
     @Override
     public int solve(Node<Integer> root) {
+       
         if (root == null)
             return 0;
 
@@ -19,6 +20,7 @@ public class StackApproach implements Solution {
             var pair = stack.pop();
             var node = pair.valueA;
             int current_depth = pair.valueB;
+            System.out.println("Visited ["+node.value+"]");
 
             if (node.left == null && node.right == null)
                 min_depth = Math.min(min_depth, current_depth);
