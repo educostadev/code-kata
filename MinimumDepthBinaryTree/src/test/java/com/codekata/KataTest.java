@@ -2,6 +2,10 @@ package com.codekata;
 
 import com.codekata.util.Node;
 import com.codekata.util.PrintTree;
+
+import lombok.Builder;
+import lombok.ToString;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -9,26 +13,37 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-
-abstract class KataTest {
+class KataTest {
 
     static int execution;
+
     /**
-     * @return Return a Stream of Argument to be tested. Arguments.of(<INPUT>,<EXPECTED>)
+     * @return Return a Stream of Argument to be tested.
+     *         Arguments.of(<DATA_INPUT>,<ALGORITHM>)
      */
     private static Stream<Arguments> readInput() {
+
+        var dataInput1 = DataInput.builder()
+                .input(new Integer[] { 3, 9, 20, null, null, 15, 7 })
+                .expected(2)
+                .treeType(Node.Type.COMPLETE_BINARY_TREE)
+                .build();
+
+        var dataInput2 = DataInput.builder()
+                .input(new Integer[] { 2, null, 3, null, 4, null, 5, null, 6 })
+                .expected(5)
+                .treeType(Node.Type.LEFT_SKEWED_BINARY_TREE)
+                .build();
+
         return Stream.of(
-                Arguments.of(
-                        new Integer[]{3, 9, 20, null, null, 15, 7},
-                        2,
-                        Node.Type.COMPLETE_BINARY_TREE
-                ),
-                Arguments.of(
-                        new Integer[]{2, null, 3, null, 4, null, 5, null, 6},
-                        5,
-                        Node.Type.LEFT_SKEWED_BINARY_TREE
-                )
-        );
+                Arguments.of(dataInput1, new BFSQueueApproach()),
+                Arguments.of(dataInput1, new DFSRecursiveApproach()),
+                Arguments.of(dataInput1, new DFSStackApproach()),
+
+                Arguments.of(dataInput2, new BFSQueueApproach()),
+                Arguments.of(dataInput2, new DFSRecursiveApproach()),
+                Arguments.of(dataInput2, new DFSStackApproach())                
+                );
     }
 
     /**
@@ -37,18 +52,17 @@ abstract class KataTest {
      * @param input    - The input that should be tested.
      * @param expected - The expected result.
      */
-   // @ParameterizedTest
+    @ParameterizedTest
     @MethodSource("readInput")
-    void solveTheProblem(Integer[] input, int expected, Node.Type treeType) {
-        Solution solution = createSolution();
-        Node<Integer> root = new Node<Integer>().toTree(input,treeType);
-        System.out.println("Execution Nr ["+(++execution)+"]");
+    void solveTheProblem(DataInput data, Solution algorithm) {
+        Node<Integer> root = new Node<Integer>().toTree(data.input, data.treeType);
+        System.out.println("Execution Nr [" + (++execution) + "]");
         PrintTree.vertical(root);
         System.out.println("\n");
-        Assertions.assertEquals(expected, solution.solve(root));
+        Assertions.assertEquals(data.expected, algorithm.solve(root));
     }
 
-    protected static Stream<Arguments> createNode() {
+    protected static Stream<Arguments> createInputUsingNode() {
         Node<Integer> root = new Node<>(1);
         root.left = new Node<>(2);
         root.left.left = new Node<>(4);
@@ -56,18 +70,41 @@ abstract class KataTest {
         root.left.right.right = new Node<>(7);
         root.right = new Node<>(3);
         root.right.right = new Node<>(6);
-        return Stream.of(Arguments.of(root, 3));
+
+        var dataInput1 = DataInputWithNode.builder()
+        .input(root)
+        .expected(3)
+        .build();
+
+        return Stream.of(
+                    Arguments.of(dataInput1, new BFSQueueApproach()),
+                    Arguments.of(dataInput1, new DFSRecursiveApproach()),
+                    Arguments.of(dataInput1, new DFSStackApproach())
+                );
     }
 
     @ParameterizedTest
-    @MethodSource("createNode")
-    protected void solveTheProblemWithNode(Node<Integer> input, Integer expected) {
-        Solution solution = createSolution();        
-        System.out.println("Execution Nr ["+(++execution)+"]");
-        PrintTree.vertical(input);
+    @MethodSource("createInputUsingNode")
+    void solveTheProblemWithNode(DataInputWithNode data, Solution algorithm) {
+        System.out.println("Execution Nr [" + (++execution) + "]");
+        PrintTree.vertical(data.input);
         System.out.println("\n");
-        Assertions.assertEquals(expected, solution.solve(input));
+        Assertions.assertEquals(data.expected, algorithm.solve(data.input));
     }
 
-    abstract Solution createSolution();
+    @Builder
+    @ToString
+    static class DataInput {
+        Integer[] input;
+        int expected;
+        Node.Type treeType;
+    }
+
+    @Builder
+    @ToString
+    static class DataInputWithNode {
+        Node<Integer> input;
+        int expected;
+    }
+
 }
