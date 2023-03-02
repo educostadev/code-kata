@@ -1,4 +1,4 @@
-package com.codekata;
+package ${package};
 
 public class MySolution implements Solution {
 

@@ -1,38 +1,63 @@
 package com.codekata;
 
-import java.util.stream.Stream;
+import com.codekata.util.Node;
+import com.codekata.util.PrintTree;
+
+import lombok.Builder;
+import lombok.ToString;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-/**
- * https://www.baeldung.com/parameterized-tests-junit-5
- */
-abstract class KataTest {
+import java.util.stream.Stream;
 
-  /**
-   * @return Return a Stream of Argument to be tested. Arguments.of(<INPUT>,<EXPECTED>)
-   */
+
+class KataTest {
+
+    static int execution;
+
+    /**
+     * @return Return a Stream of Argument to be tested.
+     *         Arguments.of(<DATA_INPUT>,<ALGORITHM>)
+     */
   private static Stream<Arguments> readInput() {
+
+    var dataInput1 = DataInput.builder()
+    .input("abacabad")
+    .expected('c')
+    .build();
+
+    var dataInput2 = DataInput.builder()
+    .input("a")
+    .expected('c')
+    .build();
+
     return Stream.of(
-        Arguments.of("abacabad", 'c'),
-        Arguments.of("a", 'c')
-    );
+      Arguments.of(dataInput1, new MySolution()),
+      Arguments.of(dataInput2, new MySolution())
+  );
   }
 
   /**
    * Adjust the method signature type according to the INPUT and EXPECTED result.
    *
-   * @param input    - The input that should be tested.
-   * @param expected - The expected result.
+   * @param data    - The input that should be tested and the result expected.
+   * @param algorithm - The aproach used to solve the problem
    */
   @ParameterizedTest
   @MethodSource("readInput")
-  void solveTheProblem(String input, char expected) {
-    Solution solution = createSolution();
-    Assertions.assertEquals(expected, solution.solve(input));
+  void solveTheProblem(DataInput data, Solution algorithm) {
+    System.out.println("Execution Nr [" + (++execution) + "]");
+    System.out.println("\n");
+    Assertions.assertEquals(data.expected, algorithm.solve(data.input));
   }
 
-  abstract Solution createSolution();
+  @Builder
+  @ToString
+  static class DataInput {
+      String input;
+      char expected;
+  }
 }

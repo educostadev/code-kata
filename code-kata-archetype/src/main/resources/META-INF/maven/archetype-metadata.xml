@@ -11,8 +11,8 @@
             <fileSet>
                 <directory>src/test/java</directory>
             </fileSet>
-            <fileSet>
-                <directory>./</directory>
+            <fileSet filtered="true">
+                <directory></directory>
                 <includes>
                     <include>**/*.md</include>
                 </includes>
