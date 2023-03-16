@@ -51,7 +51,12 @@ class KataTest {
   void solveTheProblem(DataInput data, Solution algorithm) {
     System.out.println("Execution Nr [" + (++execution) + "]");
     System.out.println("\n");
-    Assertions.assertEquals(data.expected, algorithm.solve(data.input));
+    var result = algorithm.solve(data.input);
+    var expected = data.expected;
+    if (expected.getClass().isArray() && result.getClass().isArray())
+       Assertions.assertArrayEquals(expected, result);
+    else
+       Assertions.assertEquals(expected, result);
   }
 
   @Builder

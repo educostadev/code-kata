@@ -4,7 +4,7 @@
   <!-- https://maven.apache.org/guides/mini/guide-creating-archetypes.html -->
   <groupId>com.codekata</groupId>
   <artifactId>code-kata-archetype</artifactId>
-  <version>1.4</version>
+  <version>1.5</version>
   <packaging>maven-archetype</packaging>
   
      <build>
